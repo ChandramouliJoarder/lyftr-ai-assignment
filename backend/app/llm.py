@@ -82,17 +82,18 @@ def parse_simulation_header(header_val: Optional[str]) -> Dict[str, int]:
 
 def raise_simulated_exception(status: int, key_id: str, model: str):
     """Raise corresponding LiteLLM exception for simulated status code."""
+    provider = model.split("/")[0] if "/" in model else "xai"
     msg = f"Simulated {status} failure for {key_id}"
     if status == 429:
-        raise litellm.RateLimitError(message=msg, llm_provider="gemini", model=model)
+        raise litellm.RateLimitError(message=msg, llm_provider=provider, model=model)
     elif status == 500:
-        raise litellm.InternalServerError(message=msg, llm_provider="gemini", model=model)
+        raise litellm.InternalServerError(message=msg, llm_provider=provider, model=model)
     elif status == 502:
-        raise litellm.BadGatewayError(message=msg, llm_provider="gemini", model=model)
+        raise litellm.BadGatewayError(message=msg, llm_provider=provider, model=model)
     elif status == 503:
-        raise litellm.ServiceUnavailableError(message=msg, llm_provider="gemini", model=model)
+        raise litellm.ServiceUnavailableError(message=msg, llm_provider=provider, model=model)
     else:
-        raise litellm.APIError(status_code=status, message=msg, llm_provider="gemini", model=model)
+        raise litellm.APIError(status_code=status, message=msg, llm_provider=provider, model=model)
 
 
 class AllProvidersUnavailableError(Exception):
