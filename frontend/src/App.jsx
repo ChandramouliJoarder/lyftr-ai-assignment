@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChatMessage, ChatResponse } from './types';
 import { ChatInput } from './components/ChatInput';
 import { AssistantMessage } from './components/AssistantMessage';
 import { UserMessage } from './components/UserMessage';
@@ -10,7 +9,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
-function generateSessionId(): string {
+function generateSessionId() {
   try {
     return `s-${crypto.randomUUID().slice(0, 8)}`;
   } catch {
@@ -18,16 +17,16 @@ function generateSessionId(): string {
   }
 }
 
-export const App: React.FC = () => {
-  const [sessionId, setSessionId] = useState<string>(() => generateSessionId());
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [inputMessage, setInputMessage] = useState<string>('');
-  const [systemPrompt, setSystemPrompt] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [simulationHeader, setSimulationHeader] = useState<string>('');
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+export default function App() {
+  const [sessionId, setSessionId] = useState(() => generateSessionId());
+  const [messages, setMessages] = useState([]);
+  const [inputMessage, setInputMessage] = useState('');
+  const [systemPrompt, setSystemPrompt] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [simulationHeader, setSimulationHeader] = useState('');
+  const [theme, setTheme] = useState('light');
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef(null);
 
   // Initialize theme based on preference or toggle
   useEffect(() => {
@@ -55,7 +54,7 @@ export const App: React.FC = () => {
     setInputMessage('');
   };
 
-  const handleSendMessage = async (textToSend?: string) => {
+  const handleSendMessage = async (textToSend) => {
     const text = (textToSend !== undefined ? textToSend : inputMessage).trim();
     if (!text || isLoading) return;
 
@@ -86,14 +85,14 @@ export const App: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const headers: Record<string, string> = {
+      const headers = {
         'Content-Type': 'application/json',
       };
       if (simulationHeader) {
         headers['X-Simulate-Failure'] = simulationHeader;
       }
 
-      const payload: { session_id: string; message: string; system_prompt?: string } = {
+      const payload = {
         session_id: sessionId,
         message: text,
       };
@@ -136,7 +135,7 @@ export const App: React.FC = () => {
         return;
       }
 
-      const data: ChatResponse = await response.json();
+      const data = await response.json();
 
       setMessages((prev) => [
         ...prev,
@@ -463,4 +462,4 @@ export const App: React.FC = () => {
       </div>
     </ErrorBoundary>
   );
-};
+}

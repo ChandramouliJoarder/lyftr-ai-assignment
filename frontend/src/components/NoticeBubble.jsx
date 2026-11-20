@@ -1,11 +1,6 @@
 import React from 'react';
 
-interface NoticeBubbleProps {
-  content: string;
-  isError?: boolean;
-}
-
-export const NoticeBubble: React.FC<NoticeBubbleProps> = ({ content, isError = true }) => {
+export const NoticeBubble = ({ content, isError = true }) => {
   return (
     <div
       role="alert"

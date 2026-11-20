@@ -1,10 +1,6 @@
 import React from 'react';
 
-interface UserMessageProps {
-  content: string;
-}
-
-export const UserMessage: React.FC<UserMessageProps> = ({ content }) => {
+export const UserMessage = ({ content }) => {
   return (
     <div style={{
       display: 'flex',

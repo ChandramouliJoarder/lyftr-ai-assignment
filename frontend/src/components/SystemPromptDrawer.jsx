@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 
-interface SystemPromptDrawerProps {
-  value: string;
-  onChange: (val: string) => void;
-  disabled?: boolean;
-}
-
-export const SystemPromptDrawer: React.FC<SystemPromptDrawerProps> = ({
+export const SystemPromptDrawer = ({
   value,
   onChange,
   disabled = false,

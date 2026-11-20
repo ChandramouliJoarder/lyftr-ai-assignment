@@ -1,19 +1,12 @@
 import React, { useRef, useEffect } from 'react';
 
-interface ChatInputProps {
-  value: string;
-  onChange: (val: string) => void;
-  onSend: () => void;
-  disabled?: boolean;
-}
-
-export const ChatInput: React.FC<ChatInputProps> = ({
+export const ChatInput = ({
   value,
   onChange,
   onSend,
   disabled = false,
 }) => {
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const textareaRef = useRef(null);
   const charCount = value.trim().length;
   const isNearLimit = charCount > 3500;
   const isOverLimit = charCount > 4000;
@@ -26,7 +19,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
     }
   }, [value]);
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       if (!disabled && charCount > 0 && !isOverLimit) {

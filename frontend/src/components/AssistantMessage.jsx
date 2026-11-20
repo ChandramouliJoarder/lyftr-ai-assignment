@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { AssistantMetadata } from '../types';
 
-interface AssistantMessageProps {
-  content: string;
-  metadata?: AssistantMetadata;
-}
-
-export const AssistantMessage: React.FC<AssistantMessageProps> = ({ content, metadata }) => {
+export const AssistantMessage = ({ content, metadata }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {

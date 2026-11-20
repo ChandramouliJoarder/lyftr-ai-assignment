@@ -1,6 +1,6 @@
 # The Correspondence Desk — Resilient LLM Chatbot with Key Failover & Response Caching
 
-A production-grade, fault-tolerant LLM gateway and editorial chat interface designed for high availability, zero message loss, deterministic response caching, and automated key failover. Powered by **FastAPI**, **LiteLLM**, **SQLite**, and **React (TypeScript + Vite)**.
+A production-grade, fault-tolerant LLM gateway and editorial chat interface designed for high availability, zero message loss, deterministic response caching, and automated key failover. Powered by **FastAPI**, **LiteLLM**, **SQLite**, and **React (JavaScript + Vite)**.
 
 ---
 
@@ -281,7 +281,7 @@ curl -i http://localhost:8000/sessions/demo-exhausted/messages
   - `FastAPI` + `Pydantic v2` for type validation and OpenAPI specifications.
   - `LiteLLM` for universal LLM gateway routing, model invocation, and cache interfaces.
   - `SQLite3` with WAL mode for zero-dependency ACID storage.
-  - `React 18`, `TypeScript`, and `Vite` for client-side state, accessibility, and typography.
+  - `React 18`, `JavaScript (ESNext)`, and `Vite` for client-side state, accessibility, and typography.
   - `pytest` + `httpx` (`TestClient`) for automated backend contract testing.
   - `Docker` + `docker-compose` for reproducible multi-stage container deployment.
 

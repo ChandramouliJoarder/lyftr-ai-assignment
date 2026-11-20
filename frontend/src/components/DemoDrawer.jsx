@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 
-interface DemoDrawerProps {
-  simulationHeader: string;
-  onSelectSimulation: (val: string) => void;
-}
-
-export const DemoDrawer: React.FC<DemoDrawerProps> = ({
+export const DemoDrawer = ({
   simulationHeader,
   onSelectSimulation,
 }) => {
