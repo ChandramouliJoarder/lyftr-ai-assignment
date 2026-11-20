@@ -15,7 +15,10 @@ class Settings(BaseSettings):
 
     LLM_API_KEYS: str = Field(default="", description="Comma-separated API key pool")
     LLM_MODEL: str = Field(default="gemini/gemini-2.0-flash", description="LiteLLM model string")
-    DATABASE_URL: str = Field(default="sqlite:///./app.db", description="SQLite database URL")
+    DATABASE_URL: str = Field(
+        default_factory=lambda: "sqlite:////data/app.db" if os.path.isdir("/data") else "sqlite:///./app.db",
+        description="SQLite database URL",
+    )
     ALLOWED_ORIGINS: str = Field(
         default="http://localhost:3000,http://127.0.0.1:3000,https://your-frontend.vercel.app",
         description="Comma-separated allowed CORS origins",
